@@ -1,0 +1,43 @@
+---
+ - name: update all packages
+   hosts: all
+   become: true
+   tasks:
+    - name: update
+      yum:
+        name: "*"
+        state: latest
+    - name: installing openjdk 
+      yum:
+        name: java-1.8.0-openjdk
+    - name: install tomcat
+      get_url:
+        url: "https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.73/bin/apache-tomcat-9.0.73.tar.gz"
+        dest: /usr/local
+    - name: Extracting tomcat 
+      unarchive:
+        src: "/usr/local/apache-tomcat-9.0.73.tar.gz"
+        dest: /usr/local
+        remote_src: yes
+    - name: get artifact
+      get_url:
+        url: "https://automationjava89.s3.ap-south-1.amazonaws.com/doctor-patient-ap-0.0.1-SNAPSHOT.war"
+        dest: /usr/local/apache-tomcat-9.0.73/webapps
+    - name: Copy configuration file
+      template:
+        src: conf.j2
+        dest: /usr/local/apache-tomcat-9.0.73/conf/tomcat-users.xml
+    - name: Copy configuration file
+      template:
+        src: conf1.j2
+        dest: /usr/local/apache-tomcat-9.0.73/webapps/manager/META-INF/context.xml
+    - name: Copy configuration file
+      template:
+        src: conf2.j2
+        dest: /usr/local/apache-tomcat-9.0.73/webapps/host-manager/META-INF/context.xml
+    - name: shutdown
+      shell: nohup /usr/local/apache-tomcat-9.0.73/bin/shutdown.sh
+
+    - name: starting
+      shell: nohup /usr/local/apache-tomcat-9.0.73/bin/startup.sh
+
