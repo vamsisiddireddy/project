@@ -4,12 +4,11 @@
    become: true
    tasks:
     - name: update
-      yum:
-        name: "*"
-        state: latest
+      apt:
+        update_cache: yes
     - name: installing openjdk 
-      yum:
-        name: java-1.8.0-openjdk
+      apt:
+        name: openjdk-8-jdk
     - name: install tomcat
       get_url:
         url: "https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.73/bin/apache-tomcat-9.0.73.tar.gz"
@@ -19,10 +18,10 @@
         src: "/usr/local/apache-tomcat-9.0.73.tar.gz"
         dest: /usr/local
         remote_src: yes
-    - name: get artifact
-      get_url:
-        url: "https://automationjava89.s3.ap-south-1.amazonaws.com/doctor-patient-ap-0.0.1-SNAPSHOT.war"
-        dest: /usr/local/apache-tomcat-9.0.73/webapps
+          #- name: get artifact
+          #get_url:
+          #url: "https://automationjava89.s3.ap-south-1.amazonaws.com/doctor-patient-ap-0.0.1-SNAPSHOT.war"
+          #dest: /usr/local/apache-tomcat-9.0.73/webapps
     - name: Copy configuration file
       template:
         src: conf.j2

@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  tasks:
+    - name: start an instance with a public IP address
+      amazon.aws.ec2_instance:
+        name: "node"
+        key_name: "pipeline"
+        vpc_subnet_id: subnet-05c40e8207096d763
+        region: ap-south-1  
+        instance_type: t2.micro
+        security_group: sg-077bdd7ed91a4b6a2
+        network:
+          assign_public_ip: true
+        image_id: ami-048fd8bd6b5f4ac05
