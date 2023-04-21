@@ -150,7 +150,7 @@ resource "aws_instance" "example" {
       #"ansible-playbook ~/project/Ansible/new.yaml",
       #"sleep 60",
       "ansible-inventory --list",
-      "ansible-playbook main.yaml"
+      "ansible-playbook ~/project/Ansible/main.yaml"
       #"sudo ansible-playbook ~/project/Ansible/main.yaml"
       #"ansible-playbook main.yaml --ssh-extra-args '-o StrictHostKeyChecking=no'"
     ]
