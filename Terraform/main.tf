@@ -147,7 +147,7 @@ resource "aws_instance" "example" {
       "pwd",
       "cd ~/project/Ansible/",
       "pwd",
-      "ansible-playbook ~/project/Ansible/new.yaml",
+      #"ansible-playbook ~/project/Ansible/new.yaml",
       "sleep 60",
       "ansible-inventory --list",
       "ansible-playbook main.yaml"
