@@ -1,6 +1,6 @@
 ---
  - name: update all packages
-   hosts: all
+   hosts: localhost
    become: true
    tasks:
     - name: update
