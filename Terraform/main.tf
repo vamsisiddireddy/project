@@ -145,7 +145,6 @@ resource "aws_instance" "example" {
   provisioner "remote-exec" {
     inline = [
       "pwd",
-      "sudo -i && su - vamsi",
       "cd ~/project/Ansible/",
       "pwd",
       "ansible-playbook ~/project/Ansible/new.yaml",
